@@ -1,10 +1,10 @@
 import './index.html';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'node-snackbar/dist/snackbar.css';
-import DUMMY_PRODUCTS from '../test/dummies/products.dummy.json';
 import Snackbar from 'node-snackbar';
 import { Cart } from './components/cart';
 import { Product } from './components/product';
+import { Products } from './services/products-service';
 
 function renderCart() {
     const $toolbar = document.querySelector('.toolbar');
@@ -22,16 +22,20 @@ function renderProduct(cart, product) {
         try {
             await cart.addProduct(p);
             console.log('product added to cart', p);
-            Snackbar.show({ text: 'Product was added to cart' });
+            Snackbar.show({
+                text: `Product ${p.model.name} was added to cart`,
+            });
         } catch (e) {
             console.warn('product NOT added to cart');
-            Snackbar.show({ text: 'Product was NOT added to cart' });
+            Snackbar.show({
+                text: `Product  ${p.model.name} was NOT added to cart`,
+            });
         }
     });
 }
 
-function renderProductList(cart) {
-    const products = DUMMY_PRODUCTS;
+async function renderProductList(cart) {
+    const products = await Products.instance.fetchProducts();
     products.forEach(product => {
         console.log(product);
         renderProduct(cart, product);
@@ -40,7 +44,7 @@ function renderProductList(cart) {
 
 function main() {
     const cart = renderCart();
-    renderProductList(cart);
+    renderProductList(cart).then(() => console.log('ProductList Ready'));
 }
 
 main();

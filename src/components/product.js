@@ -2,7 +2,9 @@ import { Component } from './component';
 
 export class Product extends Component {
     get template() {
-        this.model = this.model || {};
+        this.model = this.model || {
+            imageUrl: 'http://default.jpg',
+        };
         return `
                 <div class="product card mb-3 text-center">
                     <img class="product-image" src="${this.model.imageUrl}" />

@@ -11,7 +11,7 @@ export class Cart extends Component {
         return `
                 <div class="cart">
                     <button class="btn btn-primary">
-                        Cart (XXX)
+                        Cart (${this.list.length})
                     </button>
                 </div>
                 `;
@@ -27,9 +27,14 @@ export class Cart extends Component {
     // }
 
     addProduct(product) {
+        const ENDING_WITH_ER = /er$/;
         return new Promise((resolve, reject) => {
             if (product instanceof Product) {
+                if (ENDING_WITH_ER.test(product.model.name)) {
+                    reject(this.list.length);
+                }
                 this.list.push(product);
+                this.update();
                 resolve(this.list.length);
             } else {
                 reject(this.list.length);
