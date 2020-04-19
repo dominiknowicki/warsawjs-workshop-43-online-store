@@ -1,6 +1,6 @@
 import { productsUrl } from '../config';
 
-class ProductsService {
+class _ProductsService {
     fetchProducts() {
         return window.fetch(productsUrl).then(response => {
             return response.json();
@@ -8,7 +8,6 @@ class ProductsService {
     }
 }
 
-const instance = new ProductsService();
-export const Products = {
-    instance: instance,
+export const ProductsService = {
+    instance: new _ProductsService(),
 };

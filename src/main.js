@@ -4,7 +4,7 @@ import 'node-snackbar/dist/snackbar.css';
 import Snackbar from 'node-snackbar';
 import { Cart } from './components/cart';
 import { Product } from './components/product';
-import { Products } from './services/products-service';
+import { ProductsService } from './services/products-service';
 
 function renderCart() {
     const $toolbar = document.querySelector('.toolbar');
@@ -35,7 +35,7 @@ function renderProduct(cart, product) {
 }
 
 async function renderProductList(cart) {
-    const products = await Products.instance.fetchProducts();
+    const products = await ProductsService.instance.fetchProducts();
     products.forEach(product => {
         console.log(product);
         renderProduct(cart, product);
