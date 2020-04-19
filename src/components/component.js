@@ -12,5 +12,10 @@ export class Component {
     render($target) {
         const $el = Component.parse(this.template);
         $target.append($el);
+        this.$el = $el;
+    }
+
+    onClickAdd(cb) {
+        this.$el.querySelector('button').addEventListener('click', cb);
     }
 }
