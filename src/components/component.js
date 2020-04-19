@@ -1,4 +1,8 @@
 export class Component {
+    constructor() {
+        this.model = null;
+    }
+
     get template() {
         return '<p>test</p>';
     }

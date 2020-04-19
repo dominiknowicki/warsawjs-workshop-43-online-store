@@ -1,6 +1,7 @@
 import './index.html';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'node-snackbar/dist/snackbar.css';
+import DUMMY_PRODUCTS from '../test/dummies/products.dummy.json';
 import Snackbar from 'node-snackbar';
 import { Cart } from './components/cart';
 import { Product } from './components/product';
@@ -12,9 +13,10 @@ function renderCart() {
     return c;
 }
 
-function renderProduct(cart) {
+function renderProduct(cart, product) {
     const $products = document.querySelector('.products');
     const p = new Product();
+    p.model = product;
     p.render($products);
     p.onClickAdd(async () => {
         try {
@@ -29,9 +31,10 @@ function renderProduct(cart) {
 }
 
 function renderProductList(cart) {
-    const products = Array.from({ length: 3 });
-    products.forEach(() => {
-        renderProduct(cart);
+    const products = DUMMY_PRODUCTS;
+    products.forEach(product => {
+        console.log(product);
+        renderProduct(cart, product);
     });
 }
 
