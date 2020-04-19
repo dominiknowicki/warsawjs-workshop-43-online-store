@@ -1,5 +1,7 @@
 import './index.html';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'node-snackbar/dist/snackbar.css';
+import Snackbar from 'node-snackbar';
 import { Cart } from './components/cart';
 import { Product } from './components/product';
 
@@ -18,8 +20,10 @@ function renderProduct(cart) {
         try {
             await cart.addProduct(p);
             console.log('product added to cart', p);
+            Snackbar.show({ text: 'Product was added to cart' });
         } catch (e) {
             console.warn('product NOT added to cart');
+            Snackbar.show({ text: 'Product was NOT added to cart' });
         }
     });
 }
