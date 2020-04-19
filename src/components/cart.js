@@ -17,14 +17,23 @@ export class Cart extends Component {
                 `;
     }
 
-    addProduct(product) {
-        return new Promise((resolve, reject) => {
-            if (product instanceof Product) {
-                this.list.push(product);
-                resolve(this.list.length);
-            } else {
-                reject(this.list.length);
-            }
-        });
+    async addProduct(product) {
+        if (product instanceof Product) {
+            this.list.push(product);
+            return this.list.length;
+        } else {
+            throw new Error(String(this.list.length));
+        }
     }
+
+    // addProduct(product) {
+    //     return new Promise((resolve, reject) => {
+    //         if (product instanceof Product) {
+    //             this.list.push(product);
+    //             resolve(this.list.length);
+    //         } else {
+    //             reject(this.list.length);
+    //         }
+    //     });
+    // }
 }
